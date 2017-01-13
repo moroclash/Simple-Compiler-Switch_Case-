@@ -1,0 +1,432 @@
+Created by PLY version 3.9 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> switch_begin
+Rule 1     switch_begin -> switch_s
+Rule 2     switch_begin -> none
+Rule 3     none -> <empty>
+Rule 4     switch_s -> SWITCH lparen name rparen blparen CASELIST inter_finally erparen
+Rule 5     switch_s -> SWITCH lparen name rparen blparen erparen
+Rule 6     CASELIST -> inter_case simicolon
+Rule 7     CASELIST -> inter_case simicolon CASELIST
+Rule 8     term -> name
+Rule 9     term -> number
+Rule 10    term -> dqutation term dqutation
+Rule 11    exp -> PRINT lparen term rparen
+Rule 12    exp -> none
+Rule 13    exp -> name equal term
+Rule 14    exp -> switch_s
+Rule 15    inter_case -> CASE term colon exp BREAK
+Rule 16    inter_finally -> FINALLY colon exp
+Rule 17    inter_finally -> none
+
+Terminals, with rules where they appear
+
+BREAK                : 15
+CASE                 : 15
+FINALLY              : 16
+PRINT                : 11
+SWITCH               : 4 5
+blparen              : 4 5
+colon                : 15 16
+dqutation            : 10 10
+equal                : 13
+erparen              : 4 5
+error                : 
+lparen               : 4 5 11
+name                 : 4 5 8 13
+number               : 9
+rparen               : 4 5 11
+simicolon            : 6 7
+
+Nonterminals, with rules where they appear
+
+CASELIST             : 4 7
+exp                  : 15 16
+inter_case           : 6 7
+inter_finally        : 4
+none                 : 2 12 17
+switch_begin         : 0
+switch_s             : 1 14
+term                 : 10 11 13 15
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . switch_begin
+    (1) switch_begin -> . switch_s
+    (2) switch_begin -> . none
+    (4) switch_s -> . SWITCH lparen name rparen blparen CASELIST inter_finally erparen
+    (5) switch_s -> . SWITCH lparen name rparen blparen erparen
+    (3) none -> .
+
+    SWITCH          shift and go to state 1
+    $end            reduce using rule 3 (none -> .)
+
+    none                           shift and go to state 2
+    switch_s                       shift and go to state 4
+    switch_begin                   shift and go to state 3
+
+state 1
+
+    (4) switch_s -> SWITCH . lparen name rparen blparen CASELIST inter_finally erparen
+    (5) switch_s -> SWITCH . lparen name rparen blparen erparen
+
+    lparen          shift and go to state 5
+
+
+state 2
+
+    (2) switch_begin -> none .
+
+    $end            reduce using rule 2 (switch_begin -> none .)
+
+
+state 3
+
+    (0) S' -> switch_begin .
+
+
+
+state 4
+
+    (1) switch_begin -> switch_s .
+
+    $end            reduce using rule 1 (switch_begin -> switch_s .)
+
+
+state 5
+
+    (4) switch_s -> SWITCH lparen . name rparen blparen CASELIST inter_finally erparen
+    (5) switch_s -> SWITCH lparen . name rparen blparen erparen
+
+    name            shift and go to state 6
+
+
+state 6
+
+    (4) switch_s -> SWITCH lparen name . rparen blparen CASELIST inter_finally erparen
+    (5) switch_s -> SWITCH lparen name . rparen blparen erparen
+
+    rparen          shift and go to state 7
+
+
+state 7
+
+    (4) switch_s -> SWITCH lparen name rparen . blparen CASELIST inter_finally erparen
+    (5) switch_s -> SWITCH lparen name rparen . blparen erparen
+
+    blparen         shift and go to state 8
+
+
+state 8
+
+    (4) switch_s -> SWITCH lparen name rparen blparen . CASELIST inter_finally erparen
+    (5) switch_s -> SWITCH lparen name rparen blparen . erparen
+    (6) CASELIST -> . inter_case simicolon
+    (7) CASELIST -> . inter_case simicolon CASELIST
+    (15) inter_case -> . CASE term colon exp BREAK
+
+    erparen         shift and go to state 11
+    CASE            shift and go to state 9
+
+    CASELIST                       shift and go to state 10
+    inter_case                     shift and go to state 12
+
+state 9
+
+    (15) inter_case -> CASE . term colon exp BREAK
+    (8) term -> . name
+    (9) term -> . number
+    (10) term -> . dqutation term dqutation
+
+    name            shift and go to state 15
+    number          shift and go to state 16
+    dqutation       shift and go to state 13
+
+    term                           shift and go to state 14
+
+state 10
+
+    (4) switch_s -> SWITCH lparen name rparen blparen CASELIST . inter_finally erparen
+    (16) inter_finally -> . FINALLY colon exp
+    (17) inter_finally -> . none
+    (3) none -> .
+
+    FINALLY         shift and go to state 17
+    erparen         reduce using rule 3 (none -> .)
+
+    inter_finally                  shift and go to state 19
+    none                           shift and go to state 18
+
+state 11
+
+    (5) switch_s -> SWITCH lparen name rparen blparen erparen .
+
+    $end            reduce using rule 5 (switch_s -> SWITCH lparen name rparen blparen erparen .)
+    BREAK           reduce using rule 5 (switch_s -> SWITCH lparen name rparen blparen erparen .)
+    erparen         reduce using rule 5 (switch_s -> SWITCH lparen name rparen blparen erparen .)
+
+
+state 12
+
+    (6) CASELIST -> inter_case . simicolon
+    (7) CASELIST -> inter_case . simicolon CASELIST
+
+    simicolon       shift and go to state 20
+
+
+state 13
+
+    (10) term -> dqutation . term dqutation
+    (8) term -> . name
+    (9) term -> . number
+    (10) term -> . dqutation term dqutation
+
+    name            shift and go to state 15
+    number          shift and go to state 16
+    dqutation       shift and go to state 13
+
+    term                           shift and go to state 21
+
+state 14
+
+    (15) inter_case -> CASE term . colon exp BREAK
+
+    colon           shift and go to state 22
+
+
+state 15
+
+    (8) term -> name .
+
+    BREAK           reduce using rule 8 (term -> name .)
+    erparen         reduce using rule 8 (term -> name .)
+    rparen          reduce using rule 8 (term -> name .)
+    colon           reduce using rule 8 (term -> name .)
+    dqutation       reduce using rule 8 (term -> name .)
+
+
+state 16
+
+    (9) term -> number .
+
+    BREAK           reduce using rule 9 (term -> number .)
+    erparen         reduce using rule 9 (term -> number .)
+    rparen          reduce using rule 9 (term -> number .)
+    colon           reduce using rule 9 (term -> number .)
+    dqutation       reduce using rule 9 (term -> number .)
+
+
+state 17
+
+    (16) inter_finally -> FINALLY . colon exp
+
+    colon           shift and go to state 23
+
+
+state 18
+
+    (17) inter_finally -> none .
+
+    erparen         reduce using rule 17 (inter_finally -> none .)
+
+
+state 19
+
+    (4) switch_s -> SWITCH lparen name rparen blparen CASELIST inter_finally . erparen
+
+    erparen         shift and go to state 24
+
+
+state 20
+
+    (6) CASELIST -> inter_case simicolon .
+    (7) CASELIST -> inter_case simicolon . CASELIST
+    (6) CASELIST -> . inter_case simicolon
+    (7) CASELIST -> . inter_case simicolon CASELIST
+    (15) inter_case -> . CASE term colon exp BREAK
+
+    FINALLY         reduce using rule 6 (CASELIST -> inter_case simicolon .)
+    erparen         reduce using rule 6 (CASELIST -> inter_case simicolon .)
+    CASE            shift and go to state 9
+
+    CASELIST                       shift and go to state 25
+    inter_case                     shift and go to state 12
+
+state 21
+
+    (10) term -> dqutation term . dqutation
+
+    dqutation       shift and go to state 26
+
+
+state 22
+
+    (15) inter_case -> CASE term colon . exp BREAK
+    (11) exp -> . PRINT lparen term rparen
+    (12) exp -> . none
+    (13) exp -> . name equal term
+    (14) exp -> . switch_s
+    (3) none -> .
+    (4) switch_s -> . SWITCH lparen name rparen blparen CASELIST inter_finally erparen
+    (5) switch_s -> . SWITCH lparen name rparen blparen erparen
+
+    PRINT           shift and go to state 27
+    name            shift and go to state 28
+    BREAK           reduce using rule 3 (none -> .)
+    SWITCH          shift and go to state 1
+
+    none                           shift and go to state 30
+    switch_s                       shift and go to state 29
+    exp                            shift and go to state 31
+
+state 23
+
+    (16) inter_finally -> FINALLY colon . exp
+    (11) exp -> . PRINT lparen term rparen
+    (12) exp -> . none
+    (13) exp -> . name equal term
+    (14) exp -> . switch_s
+    (3) none -> .
+    (4) switch_s -> . SWITCH lparen name rparen blparen CASELIST inter_finally erparen
+    (5) switch_s -> . SWITCH lparen name rparen blparen erparen
+
+    PRINT           shift and go to state 27
+    name            shift and go to state 28
+    erparen         reduce using rule 3 (none -> .)
+    SWITCH          shift and go to state 1
+
+    none                           shift and go to state 30
+    switch_s                       shift and go to state 29
+    exp                            shift and go to state 32
+
+state 24
+
+    (4) switch_s -> SWITCH lparen name rparen blparen CASELIST inter_finally erparen .
+
+    $end            reduce using rule 4 (switch_s -> SWITCH lparen name rparen blparen CASELIST inter_finally erparen .)
+    BREAK           reduce using rule 4 (switch_s -> SWITCH lparen name rparen blparen CASELIST inter_finally erparen .)
+    erparen         reduce using rule 4 (switch_s -> SWITCH lparen name rparen blparen CASELIST inter_finally erparen .)
+
+
+state 25
+
+    (7) CASELIST -> inter_case simicolon CASELIST .
+
+    FINALLY         reduce using rule 7 (CASELIST -> inter_case simicolon CASELIST .)
+    erparen         reduce using rule 7 (CASELIST -> inter_case simicolon CASELIST .)
+
+
+state 26
+
+    (10) term -> dqutation term dqutation .
+
+    BREAK           reduce using rule 10 (term -> dqutation term dqutation .)
+    erparen         reduce using rule 10 (term -> dqutation term dqutation .)
+    rparen          reduce using rule 10 (term -> dqutation term dqutation .)
+    colon           reduce using rule 10 (term -> dqutation term dqutation .)
+    dqutation       reduce using rule 10 (term -> dqutation term dqutation .)
+
+
+state 27
+
+    (11) exp -> PRINT . lparen term rparen
+
+    lparen          shift and go to state 33
+
+
+state 28
+
+    (13) exp -> name . equal term
+
+    equal           shift and go to state 34
+
+
+state 29
+
+    (14) exp -> switch_s .
+
+    BREAK           reduce using rule 14 (exp -> switch_s .)
+    erparen         reduce using rule 14 (exp -> switch_s .)
+
+
+state 30
+
+    (12) exp -> none .
+
+    BREAK           reduce using rule 12 (exp -> none .)
+    erparen         reduce using rule 12 (exp -> none .)
+
+
+state 31
+
+    (15) inter_case -> CASE term colon exp . BREAK
+
+    BREAK           shift and go to state 35
+
+
+state 32
+
+    (16) inter_finally -> FINALLY colon exp .
+
+    erparen         reduce using rule 16 (inter_finally -> FINALLY colon exp .)
+
+
+state 33
+
+    (11) exp -> PRINT lparen . term rparen
+    (8) term -> . name
+    (9) term -> . number
+    (10) term -> . dqutation term dqutation
+
+    name            shift and go to state 15
+    number          shift and go to state 16
+    dqutation       shift and go to state 13
+
+    term                           shift and go to state 36
+
+state 34
+
+    (13) exp -> name equal . term
+    (8) term -> . name
+    (9) term -> . number
+    (10) term -> . dqutation term dqutation
+
+    name            shift and go to state 15
+    number          shift and go to state 16
+    dqutation       shift and go to state 13
+
+    term                           shift and go to state 37
+
+state 35
+
+    (15) inter_case -> CASE term colon exp BREAK .
+
+    simicolon       reduce using rule 15 (inter_case -> CASE term colon exp BREAK .)
+
+
+state 36
+
+    (11) exp -> PRINT lparen term . rparen
+
+    rparen          shift and go to state 38
+
+
+state 37
+
+    (13) exp -> name equal term .
+
+    BREAK           reduce using rule 13 (exp -> name equal term .)
+    erparen         reduce using rule 13 (exp -> name equal term .)
+
+
+state 38
+
+    (11) exp -> PRINT lparen term rparen .
+
+    BREAK           reduce using rule 11 (exp -> PRINT lparen term rparen .)
+    erparen         reduce using rule 11 (exp -> PRINT lparen term rparen .)
+

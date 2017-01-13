@@ -1,0 +1,16 @@
+switch ( x ) 
+{ 
+    case 5:
+	x =5
+        break;
+    case 3 :
+	print("dasdas")
+	break;
+case 3 :
+	print("dasdas")
+	break;
+    finally :
+        x = l
+
+}
+
