@@ -21,7 +21,7 @@
 * **Symantic error** : you write wrong sentenc or architecture or wrong order 
 
 
-Check **SwichBNF.pdf** to see **Gramer**
+Check **SwichBNF.pdf** to see **Grammer**
 
 
 
