@@ -5,13 +5,13 @@
 
 
 ##tools: 
-	* **ply** package in python
-	* **BNF** it's Representation language
+	* ply package in python
+	* BNF it's Representation language
 
 ##How use it >
 	* write your code in **Data.txt** file
-	* run **mypro.py** to get result 
-		- if you have **syntax error** will prent **\"error in Syntax\"**
+	* run mypro.py to get result 
+		- if you have syntax error will prent "error in Syntax\
 		- if you have **Symantic error** Will prent **\"error in yacc\"**
 		- else Don't prent anythink, it means the code is **true**
 
