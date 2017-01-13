@@ -11,8 +11,8 @@
 ##How use it >
 * write your code in **Data.txt** file
 * run **mypro.py** to get result 
-  - if you have **syntax error** will prent **\"error in Syntax\"**
-  - if you have **Symantic error** Will prent **\"error in yacc\"**
+  - if you have **syntax error** will print **"error in Syntax"**
+  - if you have **Symantic error** Will print **"error in yacc"**
   - else Don't prent anythink, it means the code is **true**
 
 
